@@ -6,7 +6,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { LockIcon, StarIcon, LogOut, QrCode } from "lucide-react";
+import {
+	LockIcon,
+	StarIcon,
+	LogOut,
+	QrCode,
+	Info,
+	Utensils,
+	CupSoda,
+	Icon,
+} from "lucide-react";
 
 export default function Component() {
 	return (
@@ -25,7 +34,7 @@ export default function Component() {
 				<div className="grid grid-cols-2 gap-6 mb-6">
 					<Card className="hover:shadow-lg transition-shadow cursor-pointer">
 						<CardHeader className="flex flex-row items-center space-x-4">
-							<div className="w-12 h-12 rounded-full bg-gray-200" />
+							<Info size={48} strokeWidth={1.5} className="text-gray-300" />
 							<div className="space-y-2">
 								<CardTitle>Información de la cuenta</CardTitle>
 								<p className="text-sm text-gray-500">
@@ -41,7 +50,7 @@ export default function Component() {
 					</Card>
 					<Card className="hover:shadow-lg transition-shadow cursor-pointer">
 						<CardHeader className="flex flex-row items-center space-x-4">
-							<div className="w-12 h-12 rounded-full bg-gray-200" />
+							<Utensils size={48} strokeWidth={1.5} className="text-gray-300" />
 							<div className="space-y-2 ">
 								<CardTitle>Categorías y Productos</CardTitle>
 								<p className="text-sm text-gray-500">
@@ -68,16 +77,16 @@ export default function Component() {
 						{
 							title: "Descargar QR",
 							description: "Descarga el QR de tu carta digital",
-							hasQR: true,
+							QR: true,
 						},
 						{
 							title: "Menú Diario",
-							description:
-								"Edita fácilmente tu menú diario para mantener tu menú actualizado al instante",
+							description: "Edita fácilmente tu menú diario",
 						},
 						{
 							title: "Carta de Bebidas",
 							description: "Edita los Ajustes de tus bebidas en la carta",
+							icon: true,
 						},
 					].map((item, index) => (
 						<Card
@@ -85,29 +94,45 @@ export default function Component() {
 							className="hover:shadow-lg transition-shadow cursor-pointer"
 						>
 							<CardContent className="p-6 flex flex-col items-center justify-center h-full text-center relative">
-								<div className="pb-5">
-									{item.isNew && (
-										<span className=" absolute top-2 left-2 text-xs bg-black text-white px-2 py-1 rounded">
-											NEW
-										</span>
-									)}
-									{item.isLocked && (
-										<LockIcon
-											className="absolute top-2 right-2 text-gray-500"
-											size={16}
-										/>
-									)}
-								</div>
+								{item.isNew && item.isLocked && (
+									<div className="pb-5">
+										{item.isNew && (
+											<span className=" absolute top-2 left-2 text-xs bg-black text-white px-2 py-1 rounded">
+												NEW
+											</span>
+										)}
+										{item.isLocked && (
+											<LockIcon
+												className="absolute top-2 right-2 text-gray-500"
+												size={16}
+											/>
+										)}
+									</div>
+								)}
+								{item.icon && (
+									<CupSoda
+										size={48}
+										strokeWidth={1.5}
+										className="text-gray-300"
+									/>
+								)}
 
 								<h3 className="font-semibold mb-2">{item.title}</h3>
 								<p className="text-sm text-gray-500">{item.description}</p>
-								{item.hasQR && <QrCode className="text-gray-500" />}
+								{item.QR && <QrCode className="text-gray-500" />}
 							</CardContent>
 						</Card>
 					))}
 				</div>
 
-				<Card className="hover:shadow-lg transition-shadow cursor-pointer">
+				<Card className="hover:shadow-lg transition-shadow cursor-pointer ">
+					<div className="p-2 flex flex-row items-center justify-between">
+						<span className="text-xs bg-slate-600 text-white px-2 py-1 rounded">
+							PREMIUM
+						</span>
+
+						<LockIcon className=" text-gray-500" size={16} />
+					</div>
 					<CardHeader className="flex flex-row items-center space-x-4">
 						<StarIcon className="w-12 h-12 text-gray-300" />
 						<div className="space-y-2">
@@ -115,7 +140,8 @@ export default function Component() {
 							<p className="text-sm text-gray-500">
 								En esta sección podrás encontrar y configurar diferentes premios
 								para tus clientes y la posibilidad de activar los principales
-								juegos de la marca.
+								juegos de la marca. Esta es una revolucionaria forma de crear
+								fidelizacion de tus clientes.
 							</p>
 						</div>
 					</CardHeader>
