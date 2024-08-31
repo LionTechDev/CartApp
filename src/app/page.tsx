@@ -11,10 +11,12 @@ import {
 	StarIcon,
 	LogOut,
 	QrCode,
-	Info,
+	UserPen,
 	Utensils,
 	CupSoda,
 	CalendarHeart,
+	Headset,
+	Earth,
 } from "lucide-react";
 
 export default function Component() {
@@ -34,7 +36,7 @@ export default function Component() {
 				<div className="grid grid-cols-2 gap-6 mb-6">
 					<Card className="hover:shadow-lg transition-shadow cursor-pointer">
 						<CardHeader className="flex flex-row items-center space-x-4">
-							<Info size={48} strokeWidth={1.5} className="text-gray-300" />
+							<UserPen size={48} strokeWidth={1.5} className="text-gray-300" />
 							<div className="space-y-2">
 								<CardTitle>Información de la cuenta</CardTitle>
 								<p className="text-sm text-gray-500">
@@ -113,14 +115,14 @@ export default function Component() {
 									<CupSoda
 										size={48}
 										strokeWidth={1.5}
-										className="text-gray-300"
+										className="text-gray-300 mb-2"
 									/>
 								)}
 								{item.icomenu && (
 									<CalendarHeart
 										size={48}
 										strokeWidth={1.5}
-										className="text-gray-300"
+										className="text-gray-300 mb-2"
 									/>
 								)}
 
@@ -128,7 +130,7 @@ export default function Component() {
 									<QrCode
 										size={48}
 										strokeWidth={1.5}
-										className="text-gray-300"
+										className="text-gray-300 mb-2"
 									/>
 								)}
 								<h3 className="font-semibold mb-2">{item.title}</h3>
@@ -177,9 +179,13 @@ export default function Component() {
 					PREVIEW
 				</div>
 				<div>
-					<Button className="w-full mb-2">Ver Aplicación Online</Button>
+					<Button className="w-full mb-2">
+						<Earth size={16} className="mr-2" />
+						Ver Aplicación Online
+					</Button>
 					<Button variant="outline" className="w-full">
-						Descargar QR
+						<Headset size={16} className="mr-2" />
+						Atencion al Cliente
 					</Button>
 				</div>
 			</div>
