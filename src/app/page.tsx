@@ -7,7 +7,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { LockIcon, StarIcon, LogOut, QrCode } from "lucide-react";
-import Image from "next/image";
 
 export default function Component() {
 	return (
@@ -60,15 +59,6 @@ export default function Component() {
 				<div className="grid grid-cols-4 gap-6 mb-6">
 					{[
 						{
-							title: "Menú Diario",
-							description:
-								"Edita fácilmente tu menú diario para mantener tu menú actualizado al instante",
-						},
-						{
-							title: "Carta de Bebidas",
-							description: "Edita los Ajustes de tus bebidas en la carta",
-						},
-						{
 							title: "Generar carta con IA",
 							description:
 								"Con nuestra aplicación podrás crear tu carta en segundos mejorando los textos",
@@ -79,6 +69,15 @@ export default function Component() {
 							title: "Descargar QR",
 							description: "Descarga el QR de tu carta digital",
 							hasQR: true,
+						},
+						{
+							title: "Menú Diario",
+							description:
+								"Edita fácilmente tu menú diario para mantener tu menú actualizado al instante",
+						},
+						{
+							title: "Carta de Bebidas",
+							description: "Edita los Ajustes de tus bebidas en la carta",
 						},
 					].map((item, index) => (
 						<Card
@@ -102,16 +101,7 @@ export default function Component() {
 
 								<h3 className="font-semibold mb-2">{item.title}</h3>
 								<p className="text-sm text-gray-500">{item.description}</p>
-								{item.hasQR && (
-									<QrCode className="text-gray-500" />
-									/* 		<Image
-										src="/placeholder.svg"
-										alt="QR Code"
-										width={100}
-										height={100}
-										className="mt-2"
-									/> */
-								)}
+								{item.hasQR && <QrCode className="text-gray-500" />}
 							</CardContent>
 						</Card>
 					))}
