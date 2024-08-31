@@ -6,7 +6,7 @@ export default function LoginPage() {
       <label htmlFor='email'>Email:</label>
       <input
         className='text-black'
-        id='email'
+        id='email 2'
         name='email'
         type='email'
         required
