@@ -17,6 +17,7 @@ import {
 	CalendarHeart,
 	Headset,
 	Earth,
+	CreditCard,
 } from "lucide-react";
 
 export default function Component() {
@@ -40,7 +41,7 @@ export default function Component() {
 							<div className="space-y-2">
 								<CardTitle>Información de la cuenta</CardTitle>
 								<p className="text-sm text-gray-500">
-									Información de la cuenta
+									Administra y edita los datos de tu negocio
 								</p>
 							</div>
 						</CardHeader>
@@ -76,9 +77,9 @@ export default function Component() {
 							isLocked: true,
 						},
 						{
-							title: "Descargar QR",
-							description: "Descarga el QR de tu carta digital",
-							QR: true,
+							title: "Pagos y Suscripciones",
+							description: "Accede a los pagos y suscripciones",
+							icopay: true,
 						},
 						{
 							title: "Menú Diario",
@@ -126,8 +127,8 @@ export default function Component() {
 									/>
 								)}
 
-								{item.QR && (
-									<QrCode
+								{item.icopay && (
+									<CreditCard
 										size={48}
 										strokeWidth={1.5}
 										className="text-gray-300 mb-2"
@@ -182,6 +183,10 @@ export default function Component() {
 					<Button className="w-full mb-2">
 						<Earth size={16} className="mr-2" />
 						Ver Aplicación Online
+					</Button>
+					<Button className="w-full mb-2">
+						<QrCode size={16} className="mr-2" />
+						Descargar QR
 					</Button>
 					<Button variant="outline" className="w-full">
 						<Headset size={16} className="mr-2" />
