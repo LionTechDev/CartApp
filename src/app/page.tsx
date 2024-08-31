@@ -14,7 +14,7 @@ import {
 	Info,
 	Utensils,
 	CupSoda,
-	Icon,
+	CalendarHeart,
 } from "lucide-react";
 
 export default function Component() {
@@ -69,8 +69,7 @@ export default function Component() {
 					{[
 						{
 							title: "Generar carta con IA",
-							description:
-								"Con nuestra aplicación podrás crear tu carta en segundos mejorando los textos",
+							description: "Sube una fotografia y crea tu carta en segundos",
 							isNew: true,
 							isLocked: true,
 						},
@@ -82,11 +81,12 @@ export default function Component() {
 						{
 							title: "Menú Diario",
 							description: "Edita fácilmente tu menú diario",
+							icomenu: true,
 						},
 						{
 							title: "Carta de Bebidas",
 							description: "Edita los Ajustes de tus bebidas en la carta",
-							icon: true,
+							icobebida: true,
 						},
 					].map((item, index) => (
 						<Card
@@ -109,17 +109,30 @@ export default function Component() {
 										)}
 									</div>
 								)}
-								{item.icon && (
+								{item.icobebida && (
 									<CupSoda
 										size={48}
 										strokeWidth={1.5}
 										className="text-gray-300"
 									/>
 								)}
+								{item.icomenu && (
+									<CalendarHeart
+										size={48}
+										strokeWidth={1.5}
+										className="text-gray-300"
+									/>
+								)}
 
+								{item.QR && (
+									<QrCode
+										size={48}
+										strokeWidth={1.5}
+										className="text-gray-300"
+									/>
+								)}
 								<h3 className="font-semibold mb-2">{item.title}</h3>
 								<p className="text-sm text-gray-500">{item.description}</p>
-								{item.QR && <QrCode className="text-gray-500" />}
 							</CardContent>
 						</Card>
 					))}
@@ -157,11 +170,18 @@ export default function Component() {
 				id="App-Preview"
 				className="hidden w-80 bg-white p-6 lg:flex flex-col justify-between "
 			>
-				<div className="rounded-lg bg-gray-100 h-3/4 mb-4" />
-				<Button className="w-full mb-2">Ver Aplicación Online</Button>
-				<Button variant="outline" className="w-full">
-					Descargar QR
-				</Button>
+				<div
+					className="rounded-lg bg-gray-100 h-3/4 mb-4 flex justify-center items-center
+        text-gray-500"
+				>
+					PREVIEW
+				</div>
+				<div>
+					<Button className="w-full mb-2">Ver Aplicación Online</Button>
+					<Button variant="outline" className="w-full">
+						Descargar QR
+					</Button>
+				</div>
 			</div>
 		</div>
 	);
