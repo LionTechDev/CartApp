@@ -15,22 +15,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { useSearchParams } from 'next/navigation'
 
-export default function AuthPage() {
-  const searchParams = useSearchParams()
-  const message = searchParams.get('message')
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
-  }
-
+export default function AuthPage({
+  searchParams,
+}: {
+  searchParams: { message: string }
+}) {
   return (
     <div className='flex min-h-screen'>
       {/* Columna de la imagen */}
@@ -38,7 +28,7 @@ export default function AuthPage() {
         <img
           src='https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           alt='Imagen de autenticación'
-          className='object-cover w-full h-full max-h-screen object-right'
+          className='object-cover w-full h-full max-h-screen'
         />
       </div>
 
@@ -78,13 +68,10 @@ export default function AuthPage() {
                         required
                       />
                     </div>
-                    {message && <p className='text-red-500'>{message}</p>}
-                    <Button
-                      disabled={isLoading}
-                      formAction={login}
-                    >
-                      Iniciar Sesión
-                    </Button>
+                    {searchParams.message && (
+                      <p className='text-red-500'>{searchParams.message}</p>
+                    )}
+                    <Button formAction={login}>Iniciar Sesión</Button>
                   </div>
                 </form>
               </TabsContent>
@@ -109,13 +96,10 @@ export default function AuthPage() {
                         required
                       />
                     </div>
-                    {message && <p className='text-red-500'>{message} </p>}
-                    <Button
-                      disabled={isLoading}
-                      formAction={signup}
-                    >
-                      Crear Cuenta
-                    </Button>
+                    {searchParams.message && (
+                      <p className='text-red-500'>{searchParams.message} </p>
+                    )}
+                    <Button formAction={signup}>Crear Cuenta</Button>
                   </div>
                 </form>
               </TabsContent>
@@ -134,7 +118,6 @@ export default function AuthPage() {
               <Button
                 variant='outline'
                 type='button'
-                disabled={isLoading}
               >
                 Google
               </Button>
