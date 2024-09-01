@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Component() {
   const [selectedCategory, setSelectedCategory] = useState('Categoría 1')
@@ -135,13 +135,15 @@ export default function Component() {
       {/* Sidebar */}
       <div className='w-64 bg-white shadow-md'>
         <div className='p-4 border-b'>
-          <Button
-            variant='ghost'
-            className='w-full justify-start'
-          >
-            <ChevronLeft className='mr-2 h-4 w-4' />
-            Volver
-          </Button>
+          <Link href='/dashboard'>
+            <Button
+              variant='ghost'
+              className='w-full justify-start'
+            >
+              <ChevronLeft className='mr-2 h-4 w-4' />
+              Volver
+            </Button>
+          </Link>
         </div>
         <div className='p-4'>
           <Dialog>
@@ -329,7 +331,7 @@ export default function Component() {
 
         {/* Right side - Menu Preview */}
         <div className='w-1/3 pl-4'>
-          <h2 className='text-xl font-bold mb-4 px-6'>
+          <h2 className='text-xl font-bold mb-4'>
             Previsualización de la Carta
           </h2>
           <Card className='h-[70vh] border-0 overflow-y-auto'>
