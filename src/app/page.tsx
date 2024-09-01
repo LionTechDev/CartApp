@@ -1,25 +1,21 @@
+import HomeCard from "@/components/HomeCard";
 import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 import {
 	LockIcon,
 	StarIcon,
 	LogOut,
 	QrCode,
 	UserPen,
-	Utensils,
+	Sparkles,
 	CupSoda,
 	CalendarHeart,
 	Headset,
 	Earth,
 	CreditCard,
+	Utensils,
 } from "lucide-react";
 import Link from "next/link";
+import { title } from "process";
 
 export default function Component() {
 	return (
@@ -35,139 +31,125 @@ export default function Component() {
 					<LogOut className="text-gray-500" />
 				</header>
 
-				<div className="grid grid-cols-2 gap-6 mb-6">
-					<Card className="hover:shadow-lg transition-shadow ">
-						<CardHeader className="flex flex-row items-center space-x-4">
-							<UserPen size={48} strokeWidth={1.5} className="text-gray-300" />
-							<div className="space-y-2">
-								<CardTitle>Información de la cuenta</CardTitle>
-								<p className="text-sm text-gray-500">
-									Administra y edita los datos de tu negocio
-								</p>
-							</div>
-						</CardHeader>
-						<CardFooter>
-							<Link href="/acount" className="ml-auto">
-								<Button variant="outline">Editar</Button>
-							</Link>
-						</CardFooter>
-					</Card>
-					<Card className="hover:shadow-lg transition-shadow ">
-						<CardHeader className="flex flex-row items-center space-x-4">
-							<Utensils size={48} strokeWidth={1.5} className="text-gray-300" />
-							<div className="space-y-2 ">
-								<CardTitle>Categorías y Productos</CardTitle>
-								<p className="text-sm text-gray-500">
-									Edita las categorías y productos
-								</p>
-							</div>
-						</CardHeader>
-						<CardFooter>
-							<Button variant="outline" className="ml-auto">
-								Editar
-							</Button>
-						</CardFooter>
-					</Card>
-				</div>
-				<div className="grid grid-cols-4 gap-6 mb-6">
-					{[
-						{
-							title: "Generar carta con IA",
-							description: "Sube una fotografia y crea tu carta en segundos",
-							isNew: true,
-							isLocked: true,
-						},
-						{
-							title: "Pagos y Suscripciones",
-							description: "Accede a los pagos y suscripciones",
-							icopay: true,
-						},
-						{
-							title: "Menú Diario",
-							description: "Edita fácilmente tu menú diario",
-							icomenu: true,
-						},
-						{
-							title: "Carta de Bebidas",
-							description: "Edita los Ajustes de tus bebidas en la carta",
-							icobebida: true,
-						},
-					].map((item, index) => (
-						<Card
-							key={index}
-							className="hover:shadow-lg transition-shadow cursor-pointer"
-						>
-							<CardContent className="p-6 flex flex-col items-center justify-center h-full text-center relative">
-								{item.isNew && item.isLocked && (
-									<div className="pb-5">
-										{item.isNew && (
-											<span className=" absolute top-2 left-2 text-xs bg-black text-white px-2 py-1 rounded">
-												NEW
-											</span>
-										)}
-										{item.isLocked && (
-											<LockIcon
-												className="absolute top-2 right-2 text-gray-500"
-												size={16}
-											/>
-										)}
-									</div>
-								)}
-								{item.icobebida && (
-									<CupSoda
+				<div className="grid gird-cols-1 md:grid-cols-2 mb-6  gap-6">
+					<div id="informacion de usuario">
+						<HomeCard
+							title="Información de la cuenta"
+							description="Administra y edita los datos de tu negocio"
+							icon={
+								<UserPen
+									size={48}
+									strokeWidth={1.5}
+									className="text-gray-300 mb-2"
+								/>
+							}
+							actionButton={{
+								title: "Editar",
+								link: "/acount",
+							}}
+						/>
+						<div className="grid grid-cols-2 gap-6 my-6">
+							<HomeCard
+								title="Generar carta con IA"
+								description="Sube una fotografia y crea tu carta en segundos"
+								isLocked
+								isNew
+								isVertical
+								icon={
+									<Sparkles
 										size={48}
-										strokeWidth={1.5}
+										strokeWidth={2}
 										className="text-gray-300 mb-2"
 									/>
-								)}
-								{item.icomenu && (
-									<CalendarHeart
-										size={48}
-										strokeWidth={1.5}
-										className="text-gray-300 mb-2"
-									/>
-								)}
-
-								{item.icopay && (
+								}
+							/>
+							<HomeCard
+								title="Pagos y Suscripciones"
+								description="Accede a los pagos y suscripciones"
+								isVertical
+								icon={
 									<CreditCard
 										size={48}
 										strokeWidth={1.5}
 										className="text-gray-300 mb-2"
 									/>
-								)}
-								<h3 className="font-semibold mb-2">{item.title}</h3>
-								<p className="text-sm text-gray-500">{item.description}</p>
-							</CardContent>
-						</Card>
-					))}
+								}
+								actionButton={{
+									title: "acceder",
+									link: "/acount",
+								}}
+							/>
+						</div>
+					</div>
+					<div id="informacion de productos">
+						<HomeCard
+							title="Categorias y Productos"
+							description="Edita las categorías y productos"
+							icon={
+								<Utensils
+									size={48}
+									strokeWidth={1.5}
+									className="text-gray-300 mb-2"
+								/>
+							}
+							actionButton={{
+								title: "Editar",
+								link: "/",
+							}}
+						/>
+						<div className="grid grid-cols-2 gap-6 my-6">
+							<HomeCard
+								title="Menú Diario"
+								description="Edita fácilmente tu menú diario"
+								isVertical
+								icon={
+									<CalendarHeart
+										size={48}
+										strokeWidth={2}
+										className="text-gray-300 mb-2"
+									/>
+								}
+							/>
+							<HomeCard
+								title="Carta de Bebidas"
+								description="Edita los Ajustes de tus bebidas en la carta"
+								isVertical
+								icon={
+									<CupSoda
+										size={48}
+										strokeWidth={1.5}
+										className="text-gray-300 mb-2"
+									/>
+								}
+								actionButton={{
+									title: "acceder",
+									link: "/acount",
+								}}
+							/>
+						</div>
+					</div>
 				</div>
 
-				<Card className="hover:shadow-lg transition-shadow cursor-pointer ">
-					<div className="p-2 flex flex-row items-center justify-between">
-						<span className="text-xs bg-slate-600 text-white px-2 py-1 rounded">
-							PREMIUM
-						</span>
-
-						<LockIcon className=" text-gray-500" size={16} />
-					</div>
-					<CardHeader className="flex flex-row items-center space-x-4">
-						<StarIcon className="w-12 h-12 text-gray-300" />
-						<div className="space-y-2">
-							<CardTitle>Premios y Juegos</CardTitle>
-							<p className="text-sm text-gray-500">
-								En esta sección podrás encontrar y configurar diferentes premios
+				<HomeCard
+					title="Premios y Juegos"
+					description="En esta sección podrás encontrar y configurar diferentes premios
 								para tus clientes y la posibilidad de activar los principales
 								juegos de la marca. Esta es una revolucionaria forma de crear
-								fidelizacion de tus clientes.
-							</p>
-						</div>
-					</CardHeader>
-					<CardFooter>
-						<Button variant="outline" className="ml-auto">
-							Acceder
-						</Button>
-					</CardFooter>
-				</Card>
+								fidelizacion de tus clientes."
+					isLocked
+					isPremium
+					icon={
+						<StarIcon
+							size={48}
+							strokeWidth={2}
+							className="text-gray-300 mb-2"
+						/>
+					}
+					actionButton={{
+						title: "acceder",
+						link: "/acount",
+					}}
+				/>
 			</div>
 
 			<div
