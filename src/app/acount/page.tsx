@@ -281,7 +281,7 @@ export default function Component() {
 
 			<footer className="bg-gray-100 p-4 fixed bottom-0 w-full">
 				<div className="container mx-auto flex justify-center space-x-4">
-					<Link href="/">
+					<Link href="/dashboard">
 						<Button variant="outline">Volver</Button>
 					</Link>
 					<Button>Guardar información</Button>
