@@ -19,6 +19,7 @@ import {
 	Earth,
 	CreditCard,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function Component() {
 	return (
@@ -28,14 +29,14 @@ export default function Component() {
 					<div>
 						<h1 className="text-3xl font-bold">Bienvenido {"{ User Name }"}</h1>
 						<p className="text-sm text-gray-500">
-							Edita la información del local
+							En este panel podras encontrar toda la Información de tu negocio
 						</p>
 					</div>
 					<LogOut className="text-gray-500" />
 				</header>
 
 				<div className="grid grid-cols-2 gap-6 mb-6">
-					<Card className="hover:shadow-lg transition-shadow cursor-pointer">
+					<Card className="hover:shadow-lg transition-shadow ">
 						<CardHeader className="flex flex-row items-center space-x-4">
 							<UserPen size={48} strokeWidth={1.5} className="text-gray-300" />
 							<div className="space-y-2">
@@ -46,12 +47,12 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardFooter>
-							<Button variant="outline" className="ml-auto">
-								Editar
-							</Button>
+							<Link href="/acount" className="ml-auto">
+								<Button variant="outline">Editar</Button>
+							</Link>
 						</CardFooter>
 					</Card>
-					<Card className="hover:shadow-lg transition-shadow cursor-pointer">
+					<Card className="hover:shadow-lg transition-shadow ">
 						<CardHeader className="flex flex-row items-center space-x-4">
 							<Utensils size={48} strokeWidth={1.5} className="text-gray-300" />
 							<div className="space-y-2 ">
