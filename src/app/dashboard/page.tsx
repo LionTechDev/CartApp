@@ -2,7 +2,6 @@ import HomeCard from "@/components/HomeCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import {
-	LockIcon,
 	StarIcon,
 	LogOut,
 	QrCode,
@@ -16,21 +15,25 @@ import {
 	Utensils,
 } from "lucide-react";
 import { signOut } from "../login/actions";
+import { checkLogin, getUser } from "@/utils/utils";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+	const { user } = await getUser();
+	await checkLogin();
+
 	return (
 		<div id="Home" className="flex min-h-screen  bg-gray-100">
 			<div className="flex-1 p-8">
 				<header className="flex justify-between items-center mb-8">
 					<div>
-						<h1 className="text-3xl font-bold">Bienvenido {"{ User Name }"}</h1>
+						<h1 className="text-3xl font-bold">Bienvenido {user?.email}</h1>
 						<p className="text-sm text-gray-500">
 							En este panel podras encontrar toda la Información de tu negocio
 						</p>
 					</div>
-					<form className="flex gap-2 items-center">
-						<Button formAction={signOut}>
-							<LogOut className="text-gray-500" />
+					<form className="flex gap-2 items-center ">
+						<Button formAction={signOut} variant="ghost">
+							<LogOut className="text-gray-500 mr-2" />
 							<span>CERRAR SESION</span>
 						</Button>
 					</form>
