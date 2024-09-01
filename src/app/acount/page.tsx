@@ -215,10 +215,18 @@ export default function Component() {
 													className="w-24"
 													disabled={!schedule.isOpen}
 												/>
+												<Button
+													variant="outline"
+													size="sm"
+													onClick={() => addTimeSlot(day)}
+													disabled={!schedule.isOpen}
+												>
+													<Plus className="w-4  " />
+												</Button>
 											</div>
 										</div>
 										{schedule.isOpen && schedule.timeSlots.length > 1 && (
-											<div className="ml-28 space-y-2">
+											<div className=" flex items-end gap-2 flex-col">
 												{schedule.timeSlots.slice(1).map((slot, index) => (
 													<div
 														key={index + 1}
@@ -261,19 +269,6 @@ export default function Component() {
 														</Button>
 													</div>
 												))}
-											</div>
-										)}
-										{schedule.isOpen && (
-											<div className="flex justify-end ml-28">
-												<Button
-													variant="outline"
-													size="sm"
-													onClick={() => addTimeSlot(day)}
-													className="mt-2"
-												>
-													<Plus className="w-4 h-4 mr-2" /> Agregar franja
-													horaria
-												</Button>
 											</div>
 										)}
 									</div>
