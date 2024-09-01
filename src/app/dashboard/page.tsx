@@ -158,7 +158,7 @@ export default async function Dashboard() {
                 }
                 actionButton={{
                   title: 'Editar',
-                  link: '/catalog',
+                  link: '/dashboard/catalog',
                 }}
               />
             </div>
