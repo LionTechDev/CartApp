@@ -329,12 +329,12 @@ export default function Component() {
 
         {/* Right side - Menu Preview */}
         <div className='w-1/3 pl-4'>
-          <Card className='h-full border-0'>
-            <CardContent className='p-0 pt-6'>
-              <h2 className='text-xl font-bold mb-4 px-6'>
-                Previsualización de la Carta
-              </h2>
-              <ScrollArea className='h-[calc(100vh-200px)]'>
+          <h2 className='text-xl font-bold mb-4 px-6'>
+            Previsualización de la Carta
+          </h2>
+          <Card className='h-[70vh] border-0 overflow-y-auto'>
+            <CardContent className='p-0 rounded-t-xl overflow-hidden'>
+              <ScrollArea>
                 {categories.map((category) => (
                   <div
                     key={category.name}
