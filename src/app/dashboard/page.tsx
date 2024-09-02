@@ -15,7 +15,7 @@ import {
 	QrCode,
 	UserPen,
 	Sparkles,
-	CupSoda,
+	NotebookText,
 	CalendarHeart,
 	Earth,
 	Mail,
@@ -31,10 +31,8 @@ export default async function Dashboard() {
 		<div className="bg-background text-foreground">
 			<header className="flex items-center justify-between border-b px-6 py-4 sticky top-0 z-10 bg-background">
 				<div>
-					<h1 className="text-2xl font-bold">Bienvenido {user?.email}</h1>
-					<p className="text-muted-foreground">
-						En este panel podrás encontrar toda la información de tu negocio
-					</p>
+					<h1 className="text-2xl font-bold">MENU APP</h1>
+					<span className="text-sm sm">Bienvenido {user?.email}</span>
 				</div>
 				<div className="hidden md:flex items-center gap-4">
 					<Button variant="ghost" className="flex items-center gap-2">
@@ -117,12 +115,12 @@ export default async function Dashboard() {
 						</p>
 					</Card>
 				</Link>
-				<Link href="#" prefetch={false}>
+				<Link href="/dashboard/menus" prefetch={false}>
 					<Card className="flex flex-col items-center rounded-lg border-0 bg-card p-6 shadow-sm hover:shadow-lg transition-shadow h-full">
-						<CupSoda className="mb-4 h-12 w-12 text-muted-foreground" />
-						<h2 className="text-lg font-semibold">Carta de Bebidas</h2>
+						<NotebookText className="mb-4 h-12 w-12 text-muted-foreground" />
+						<h2 className="text-lg font-semibold">Mis Cartas</h2>
 						<p className="text-muted-foreground">
-							Edita los ajustes de tus bebidas en la carta
+							Edita los ajustes de tus cartas
 						</p>
 					</Card>
 				</Link>
