@@ -234,11 +234,11 @@ export default function Component() {
 	);
 }
 
-function DayScheduleEditor({ day, schedule, setSchedule }) {
+function DayScheduleEditor({ day, schedule, setSchedule }: any) {
 	const { isOpen, timeSlots } = schedule[day];
 
 	const toggleDay = () => {
-		setSchedule((prev) => ({
+		setSchedule((prev: any) => ({
 			...prev,
 			[day]: {
 				...prev[day],
@@ -249,7 +249,7 @@ function DayScheduleEditor({ day, schedule, setSchedule }) {
 	};
 
 	const addTimeSlot = () => {
-		setSchedule((prev) => ({
+		setSchedule((prev: any) => ({
 			...prev,
 			[day]: {
 				...prev[day],
@@ -259,11 +259,11 @@ function DayScheduleEditor({ day, schedule, setSchedule }) {
 	};
 
 	const removeTimeSlot = (index: number) => {
-		setSchedule((prev) => ({
+		setSchedule((prev: any) => ({
 			...prev,
 			[day]: {
 				...prev[day],
-				timeSlots: prev[day].timeSlots.filter((_, i) => i !== index),
+				timeSlots: prev[day].timeSlots.filter((_: any, i: any) => i !== index),
 			},
 		}));
 	};
@@ -273,11 +273,11 @@ function DayScheduleEditor({ day, schedule, setSchedule }) {
 		field: "start" | "end",
 		value: string
 	) => {
-		setSchedule((prev) => ({
+		setSchedule((prev: any) => ({
 			...prev,
 			[day]: {
 				...prev[day],
-				timeSlots: prev[day].timeSlots.map((slot, i) =>
+				timeSlots: prev[day].timeSlots.map((slot: any, i: any) =>
 					i === index ? { ...slot, [field]: value } : slot
 				),
 			},
@@ -306,7 +306,7 @@ function DayScheduleEditor({ day, schedule, setSchedule }) {
 			</div>
 			{isOpen && (
 				<div className="space-y-3 ml-4">
-					{timeSlots.map((slot, index) => (
+					{timeSlots.map((slot: any, index: any) => (
 						<div key={index} className="flex items-center space-x-2">
 							<Sun className="h-4 w-4 text-yellow-500" />
 							<Input

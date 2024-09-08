@@ -124,15 +124,17 @@ export default async function Dashboard() {
 						</p>
 					</Card>
 				</Link>
-				<Link href="#" prefetch={false}>
+				<Link href="/dashboard/menuSuggestionsAI" prefetch={false}>
 					<Card className="relative flex flex-col items-center rounded-lg border-0 bg-card p-6 shadow-sm hover:shadow-lg transition-shadow h-full">
 						<Badge variant="default" className="absolute top-4 left-4">
 							NEW
 						</Badge>
 						<Sparkles className="mb-4 h-12 w-12 text-muted-foreground" />
-						<h2 className="text-lg font-semibold">Generar carta con IA</h2>
+						<h2 className="text-lg font-semibold">
+							Genera Sugerencias para Menú
+						</h2>
 						<p className="text-muted-foreground">
-							Sube una fotografía y crea tu carta en segundos
+							para generar sugerencias para tu menú con IA
 						</p>
 					</Card>
 				</Link>
