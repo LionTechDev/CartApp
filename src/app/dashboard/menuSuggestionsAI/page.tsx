@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/select";
 import { ArrowLeft, Plus, Sparkles } from "lucide-react";
 import { DATA, PROMPT } from "./utils/utils";
-import { parse } from "path";
 import Link from "next/link";
 
 export default function Component() {
