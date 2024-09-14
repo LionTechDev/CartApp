@@ -23,10 +23,14 @@ import {
 	Trash2,
 	Pencil,
 	Search,
-	Check,
+	Globe,
+	Printer,
+	QrCode,
 	Settings,
+	Check,
 	X,
-	ChevronLeft,
+	ArrowUp,
+	ArrowDown,
 } from "lucide-react";
 import {
 	Select,
@@ -35,13 +39,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import Link from "next/link";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 type Menu = {
 	id: number;
 	name: string;
-	isActive: boolean;
+	isPublished: boolean;
 	categories: string[];
+	onlineUrl?: string;
 };
 
 const PREDEFINED_CATEGORIES = [
@@ -57,25 +63,24 @@ export default function Component() {
 		{
 			id: 1,
 			name: "Carta de Verano",
-			isActive: true,
+			isPublished: true,
 			categories: ["ENSALADAS", "BEBIDAS"],
 		},
 		{
 			id: 2,
 			name: "Carta de Invierno",
-			isActive: false,
+			isPublished: false,
 			categories: ["PIZZAS", "HAMBURGUESAS"],
 		},
 		{
 			id: 3,
 			name: "Carta Especial",
-			isActive: false,
+			isPublished: false,
 			categories: ["POSTRES", "BEBIDAS"],
 		},
 	]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 	const [isDeleteCategoryDialogOpen, setIsDeleteCategoryDialogOpen] =
 		useState(false);
 	const [
@@ -84,15 +89,15 @@ export default function Component() {
 	] = useState(false);
 	const [isConfirmDeleteMenuDialogOpen, setIsConfirmDeleteMenuDialogOpen] =
 		useState(false);
+	const [isOnlineMenuDialogOpen, setIsOnlineMenuDialogOpen] = useState(false);
 	const [currentMenu, setCurrentMenu] = useState<Menu>({
 		id: null,
 		name: "",
-		isActive: false,
+		isPublished: false,
 		categories: [],
 	});
 	const [editingId, setEditingId] = useState<number | null>(null);
 	const [editingName, setEditingName] = useState("");
-	const [menuToActivate, setMenuToActivate] = useState<number | null>(null);
 	const [categoryToDelete, setCategoryToDelete] = useState<{
 		menuId: number;
 		category: string;
@@ -101,6 +106,7 @@ export default function Component() {
 		number | null
 	>(null);
 	const [menuToDelete, setMenuToDelete] = useState<number | null>(null);
+	const [menuToPublish, setMenuToPublish] = useState<number | null>(null);
 
 	const filteredMenus = menus.filter((menu) =>
 		menu.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -110,7 +116,7 @@ export default function Component() {
 		const newMenu = { ...currentMenu, id: Date.now() };
 		setMenus([...menus, newMenu]);
 		setIsDialogOpen(false);
-		setCurrentMenu({ id: null, name: "", isActive: false, categories: [] });
+		setCurrentMenu({ id: null, name: "", isPublished: false, categories: [] });
 	};
 
 	const handleDeleteMenu = () => {
@@ -121,22 +127,12 @@ export default function Component() {
 		}
 	};
 
-	const handleSetActiveMenu = (id: number) => {
-		setMenuToActivate(id);
-		setIsConfirmDialogOpen(true);
-	};
-
-	const confirmActivateMenu = () => {
-		if (menuToActivate !== null) {
-			setMenus(
-				menus.map((menu) => ({
-					...menu,
-					isActive: menu.id === menuToActivate,
-				}))
-			);
-			setIsConfirmDialogOpen(false);
-			setMenuToActivate(null);
-		}
+	const handleTogglePublish = (id: number) => {
+		setMenus(
+			menus.map((menu) =>
+				menu.id === id ? { ...menu, isPublished: !menu.isPublished } : menu
+			)
+		);
 	};
 
 	const handleAddCategory = (menuId: number, category: string) => {
@@ -208,16 +204,58 @@ export default function Component() {
 		);
 	};
 
+	const handleMoveCategory = (
+		menuId: number,
+		categoryIndex: number,
+		direction: "up" | "down"
+	) => {
+		setMenus(
+			menus.map((menu) => {
+				if (menu.id === menuId) {
+					const newCategories = [...menu.categories];
+					if (direction === "up" && categoryIndex > 0) {
+						[newCategories[categoryIndex - 1], newCategories[categoryIndex]] = [
+							newCategories[categoryIndex],
+							newCategories[categoryIndex - 1],
+						];
+					} else if (
+						direction === "down" &&
+						categoryIndex < newCategories.length - 1
+					) {
+						[newCategories[categoryIndex], newCategories[categoryIndex + 1]] = [
+							newCategories[categoryIndex + 1],
+							newCategories[categoryIndex],
+						];
+					}
+					return { ...menu, categories: newCategories };
+				}
+				return menu;
+			})
+		);
+	};
+
+	const handlePublishMenu = (menuId: number) => {
+		setMenus(
+			menus.map((menu) =>
+				menu.id === menuId
+					? { ...menu, onlineUrl: `https://example.com/menu/${menuId}` }
+					: menu
+			)
+		);
+		setMenuToPublish(menuId);
+		setIsOnlineMenuDialogOpen(true);
+	};
+
 	return (
 		<div className="flex h-screen bg-gray-100">
-			<aside className="w-64 bg-white shadow-md">
-				<div className="p-4 border-b">
-					<Link href="/dashboard">
-						<Button variant="ghost" className="w-full justify-start">
-							<ChevronLeft className="mr-2 h-4 w-4" />
-							Volver
-						</Button>
-					</Link>
+			<aside className="w-64 bg-white shadow-md flex flex-col">
+				<div className="p-4 flex-grow">
+					<Button variant="ghost" className="w-full justify-start mb-4">
+						<ArrowLeft className="mr-2 h-4 w-4" /> Volver
+					</Button>
+					<Button className="w-full mb-4" onClick={() => setIsDialogOpen(true)}>
+						<Plus className="mr-2 h-4 w-4" /> Crear Nueva Carta
+					</Button>
 				</div>
 			</aside>
 
@@ -237,12 +275,7 @@ export default function Component() {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 					{filteredMenus.map((menu) => (
-						<Card
-							key={menu.id}
-							className={`flex flex-col ${
-								menu.isActive ? "border-2 border-black" : ""
-							}`}
-						>
+						<Card key={menu.id} className="flex flex-col">
 							<CardHeader className="pb-2">
 								<CardTitle className="flex justify-between items-center">
 									{editingId === menu.id ? (
@@ -284,14 +317,14 @@ export default function Component() {
 							</CardHeader>
 							<CardContent>
 								<div className="flex flex-col space-y-2 mb-4">
-									<Link
-										href="/dashboard/catalog"
-										className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground flex 
-										h-8 rounded-md px-3 text-xs justify-center items-center"
+									<Button
+										variant="outline"
+										size="sm"
+										onClick={() => handleNavigateToManageCategories(menu.id)}
 									>
-										<Settings className="h-4 w-4 mr-2" />
-										<span>Crear o Administrar categorías</span>
-									</Link>
+										<Settings className="h-4 w-4 mr-2" /> Crear o Administrar
+										categorías
+									</Button>
 									<Button
 										variant="outline"
 										size="sm"
@@ -311,16 +344,38 @@ export default function Component() {
 											className="flex items-center justify-between"
 										>
 											<span>{category}</span>
-											<Button
-												variant="ghost"
-												size="sm"
-												onClick={() => {
-													setCategoryToDelete({ menuId: menu.id, category });
-													setIsDeleteCategoryDialogOpen(true);
-												}}
-											>
-												<Trash2 className="h-4 w-4" />
-											</Button>
+											<div>
+												<Button
+													variant="ghost"
+													size="sm"
+													onClick={() =>
+														handleMoveCategory(menu.id, index, "up")
+													}
+													disabled={index === 0}
+												>
+													<ArrowUp className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="sm"
+													onClick={() =>
+														handleMoveCategory(menu.id, index, "down")
+													}
+													disabled={index === menu.categories.length - 1}
+												>
+													<ArrowDown className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="sm"
+													onClick={() => {
+														setCategoryToDelete({ menuId: menu.id, category });
+														setIsDeleteCategoryDialogOpen(true);
+													}}
+												>
+													<Trash2 className="h-4 w-4" />
+												</Button>
+											</div>
 										</div>
 									))}
 								</div>
@@ -346,41 +401,42 @@ export default function Component() {
 									</Select>
 								</div>
 							</CardContent>
-							<CardFooter className="flex justify-between mt-auto">
+							<CardFooter className="flex flex-col space-y-2">
+								<div className="flex justify-between items-center w-full">
+									<Button
+										variant="outline"
+										size="sm"
+										className="text-red-500"
+										onClick={() => {
+											setMenuToDelete(menu.id);
+											setIsConfirmDeleteMenuDialogOpen(true);
+										}}
+									>
+										<Trash2 className="h-4 w-4 mr-2" /> Eliminar
+									</Button>
+									<div className="flex items-center space-x-2">
+										<Switch
+											id={`publish-${menu.id}`}
+											checked={menu.isPublished}
+											onCheckedChange={() => handleTogglePublish(menu.id)}
+										/>
+										<Label htmlFor={`publish-${menu.id}`}>
+											{menu.isPublished ? "Publicada" : "Sin publicar"}
+										</Label>
+									</div>
+								</div>
 								<Button
 									variant="outline"
 									size="sm"
-									className="text-red-500"
-									onClick={() => {
-										setMenuToDelete(menu.id);
-										setIsConfirmDeleteMenuDialogOpen(true);
-									}}
+									className="w-full"
+									onClick={() => handlePublishMenu(menu.id)}
 								>
-									<Trash2 className="h-4 w-4 mr-2" /> Eliminar
-								</Button>
-								<Button
-									variant="outline"
-									size="sm"
-									className={menu.isActive ? "bg-black text-white" : ""}
-									onClick={() => handleSetActiveMenu(menu.id)}
-								>
-									<Check className="h-4 w-4 mr-2" />{" "}
-									{menu.isActive ? "Activa" : "Activar"}
+									{menu.onlineUrl ? <Globe className="h-4 w-4 mr-2" /> : null}
+									{menu.onlineUrl ? "Carta Online" : "Publicar Carta"}
 								</Button>
 							</CardFooter>
 						</Card>
 					))}
-
-					<Card className="flex items-center justify-center">
-						<Button
-							variant="ghost"
-							className="h-full w-full flex flex-col items-center py-8"
-							onClick={() => setIsDialogOpen(true)}
-						>
-							<Plus className="h-8 w-8 mb-2" />
-							<span>Crear Nueva Carta</span>
-						</Button>
-					</Card>
 				</div>
 			</main>
 
@@ -408,27 +464,6 @@ export default function Component() {
 						<Button type="submit" onClick={handleCreateMenu}>
 							Crear Carta
 						</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
-
-			<Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
-				<DialogContent>
-					<DialogHeader>
-						<DialogTitle>Confirmar Activación</DialogTitle>
-					</DialogHeader>
-					<DialogDescription>
-						¿Estás seguro de que quieres activar esta carta? La carta
-						actualmente activa se desactivará.
-					</DialogDescription>
-					<DialogFooter>
-						<Button
-							variant="outline"
-							onClick={() => setIsConfirmDialogOpen(false)}
-						>
-							Cancelar
-						</Button>
-						<Button onClick={confirmActivateMenu}>Confirmar</Button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
@@ -502,6 +537,46 @@ export default function Component() {
 							Cancelar
 						</Button>
 						<Button onClick={handleDeleteMenu}>Confirmar</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+
+			<Dialog
+				open={isOnlineMenuDialogOpen}
+				onOpenChange={setIsOnlineMenuDialogOpen}
+			>
+				<DialogContent className="sm:max-w-[425px]">
+					<DialogHeader>
+						<DialogTitle>Carta Online Publicada</DialogTitle>
+					</DialogHeader>
+					<DialogDescription>
+						Tu carta online ha sido publicada exitosamente. ¿Qué deseas hacer?
+					</DialogDescription>
+					<div className="grid gap-4 py-4">
+						<Button
+							onClick={() =>
+								window.open(
+									menus.find((m) => m.id === menuToPublish)?.onlineUrl,
+									"_blank"
+								)
+							}
+						>
+							<Globe className="h-4 w-4 mr-2" /> Ir a mi carta online
+						</Button>
+						<Button onClick={() => alert("Imprimiendo carta online...")}>
+							<Printer className="h-4 w-4 mr-2" /> Imprimir carta online
+						</Button>
+						<Button onClick={() => alert("Imprimiendo QR...")}>
+							<QrCode className="h-4 w-4 mr-2" /> Imprimir QR
+						</Button>
+					</div>
+					<DialogFooter>
+						<Button
+							variant="outline"
+							onClick={() => setIsOnlineMenuDialogOpen(false)}
+						>
+							Cerrar
+						</Button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
