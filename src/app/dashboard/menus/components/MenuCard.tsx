@@ -200,8 +200,8 @@ export const MenuCard = (props: any) => {
 					className="w-full"
 					onClick={() => props.handlePublishMenu(props.menu.id)}
 				>
-					{props.menu.onlineUrl ? <Globe className="h-4 w-4 mr-2" /> : null}
-					{props.menu.onlineUrl ? "Carta Online" : "Publicar Carta"}
+					{props.menu.isPublished ? <Globe className="h-4 w-4 mr-2" /> : null}
+					{props.menu.isPublished ? "Carta Online" : "Publicar Carta"}
 				</Button>
 			</CardFooter>
 		</Card>

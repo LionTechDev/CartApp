@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "../interfaces/Menu";
 
 export const useMenuHandlers = () => {
+
+  
   const [menus, setMenus] = useState<Menu[]>([
     { id: 1, name: "Carta de Verano", isPublished: true, categories: ["ENSALADAS", "BEBIDAS"] },
     { id: 2, name: "Carta de Invierno", isPublished: false, categories: ["PIZZAS", "HAMBURGUESAS"] },
-    { id: 3, name: "Carta Especial", isPublished: false, categories: ["POSTRES", "BEBIDAS"] },
+
   ]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -122,7 +124,9 @@ export const useMenuHandlers = () => {
     );
   };
 
+  // ESTA FUNCION ES LA QUE DEBERIA GUARDAR EN LA DB LA INFORMACION DE LA CARTA
   const handlePublishMenu = (menuId: number) => {
+
     setMenus(
       menus.map((menu) =>
         menu.id === menuId
@@ -132,8 +136,14 @@ export const useMenuHandlers = () => {
     );
     setMenuToPublish(menuId);
     setIsOnlineMenuDialogOpen(true);
+    const isPublished = menus.find((menu) => menu.id === menuId)?.isPublished;
+    if (!isPublished) {  
+      handleTogglePublish(menuId);
+    }
   };
 
+
+  
   return {
     menus,
     searchTerm,
