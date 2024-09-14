@@ -41,6 +41,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 type Menu = {
 	id: number;
@@ -113,6 +114,7 @@ export default function Component() {
 	);
 
 	const handleCreateMenu = () => {
+		if (currentMenu.name.trim() === "") return;
 		const newMenu = { ...currentMenu, id: Date.now() };
 		setMenus([...menus, newMenu]);
 		setIsDialogOpen(false);
@@ -198,12 +200,6 @@ export default function Component() {
 		setEditingName("");
 	};
 
-	const handleNavigateToManageCategories = (menuId: number) => {
-		alert(
-			`Navegando a la pantalla de administración de categorías para el menú con ID: ${menuId}`
-		);
-	};
-
 	const handleMoveCategory = (
 		menuId: number,
 		categoryIndex: number,
@@ -250,12 +246,19 @@ export default function Component() {
 		<div className="flex h-screen bg-gray-100">
 			<aside className="w-64 bg-white shadow-md flex flex-col">
 				<div className="p-4 flex-grow">
-					<Button variant="ghost" className="w-full justify-start mb-4">
-						<ArrowLeft className="mr-2 h-4 w-4" /> Volver
-					</Button>
-					<Button className="w-full mb-4" onClick={() => setIsDialogOpen(true)}>
-						<Plus className="mr-2 h-4 w-4" /> Crear Nueva Carta
-					</Button>
+					<Link href="/dashboard">
+						<Button variant="ghost" className="w-full justify-start mb-4">
+							<ArrowLeft className="mr-2 h-4 w-4" /> Volver
+						</Button>
+					</Link>
+					<div>
+						<Button
+							className="w-full mb-4"
+							onClick={() => setIsDialogOpen(true)}
+						>
+							<Plus className="mr-2 h-4 w-4" /> Crear Nueva Carta
+						</Button>
+					</div>
 				</div>
 			</aside>
 
@@ -269,7 +272,7 @@ export default function Component() {
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 						className="w-full"
-						icon={<Search className="h-4 w-4 text-gray-500" />}
+						/* 	icon={<Search className="h-4 w-4 text-gray-500" />} */
 					/>
 				</div>
 
@@ -316,26 +319,32 @@ export default function Component() {
 								</CardTitle>
 							</CardHeader>
 							<CardContent>
-								<div className="flex flex-col space-y-2 mb-4">
-									<Button
-										variant="outline"
-										size="sm"
-										onClick={() => handleNavigateToManageCategories(menu.id)}
-									>
-										<Settings className="h-4 w-4 mr-2" /> Crear o Administrar
-										categorías
-									</Button>
-									<Button
-										variant="outline"
-										size="sm"
-										onClick={() => {
-											setMenuToDeleteAllCategories(menu.id);
-											setIsConfirmDeleteAllCategoriesDialogOpen(true);
-										}}
-									>
-										<Trash2 className="h-4 w-4 mr-2" /> Quitar todas las
-										categorías
-									</Button>
+								<div className="flex flex-col space-y-2 mb-4 ">
+									<Link href={"/dashboard/catalog"}>
+										<Button
+											className="w-full"
+											variant="outline"
+											size="sm"
+											/* onClick={() => handleNavigateToManageCategories(menu.id)} */
+										>
+											<Settings className="h-4 w-4 mr-2" /> Crear o Administrar
+											categorías
+										</Button>
+									</Link>
+									<div>
+										<Button
+											className="w-full"
+											variant="outline"
+											size="sm"
+											onClick={() => {
+												setMenuToDeleteAllCategories(menu.id);
+												setIsConfirmDeleteAllCategoriesDialogOpen(true);
+											}}
+										>
+											<Trash2 className="h-4 w-4 mr-2" /> Quitar todas las
+											categorías
+										</Button>
+									</div>
 								</div>
 								<div className="space-y-2">
 									{menu.categories.map((category, index) => (
