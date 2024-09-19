@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <p>esto es un layout</p>
+      <p>Esto es un layout de pruebas</p>
       <body className={inter.className}>{children}</body>
     </html>
   )
