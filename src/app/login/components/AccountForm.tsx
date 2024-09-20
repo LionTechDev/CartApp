@@ -33,7 +33,7 @@ const AccountForm = ({
           />
         </div>
         {message && <p className='text-red-500'>{message}</p>}
-        <Button formAction={login}>Iniciar Sesión</Button>
+
         {variant === 'login' && (
           <Button formAction={login}>Iniciar Sesión</Button>
         )}
