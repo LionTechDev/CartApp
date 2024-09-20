@@ -1,11 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import { useState } from 'react'
-import { login, signup } from './actions'
-import Image from 'next/image'
+
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Card,
@@ -15,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import AccountForm from './components/AccountForm'
 
 export default function AuthPage({
   searchParams,
@@ -48,60 +45,16 @@ export default function AuthPage({
                 <TabsTrigger value='register'>Registrarse</TabsTrigger>
               </TabsList>
               <TabsContent value='login'>
-                <form>
-                  <div className='grid gap-4'>
-                    <div className='grid gap-2'>
-                      <Label htmlFor='email'>Correo Electrónico</Label>
-                      <Input
-                        id='email 2'
-                        name='email'
-                        type='email'
-                        required
-                      />
-                    </div>
-                    <div className='grid gap-2'>
-                      <Label htmlFor='password'>Contraseña</Label>
-                      <Input
-                        id='password'
-                        name='password'
-                        type='password'
-                        required
-                      />
-                    </div>
-                    {searchParams.message && (
-                      <p className='text-red-500'>{searchParams.message}</p>
-                    )}
-                    <Button formAction={login}>Iniciar Sesión</Button>
-                  </div>
-                </form>
+                <AccountForm
+                  message={searchParams?.message}
+                  variant='login'
+                />
               </TabsContent>
               <TabsContent value='register'>
-                <form>
-                  <div className='grid gap-4'>
-                    <div className='grid gap-2'>
-                      <Label htmlFor='email'>Correo Electrónico</Label>
-                      <Input
-                        id='email'
-                        name='email'
-                        type='email'
-                        required
-                      />
-                    </div>
-                    <div className='grid gap-2'>
-                      <Label htmlFor='password'>Contraseña</Label>
-                      <Input
-                        id='password'
-                        name='password'
-                        type='password'
-                        required
-                      />
-                    </div>
-                    {searchParams.message && (
-                      <p className='text-red-500'>{searchParams.message} </p>
-                    )}
-                    <Button formAction={signup}>Crear Cuenta</Button>
-                  </div>
-                </form>
+                <AccountForm
+                  message={searchParams?.message}
+                  variant='register'
+                />
               </TabsContent>
             </Tabs>
             <div className='relative my-4'>
