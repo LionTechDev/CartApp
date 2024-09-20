@@ -16,8 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <p>Esto es un layout de pruebas</p>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main>{children}</main>
+        <p>Esto es un layout de pruebas</p>
+      </body>
     </html>
   )
 }
