@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
-
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
@@ -12,12 +10,16 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import AccountForm from './components/AccountForm'
+import { getUser } from '@/utils/utils'
+import { redirect } from 'next/navigation'
 
-export default function AuthPage({
+export default async function AuthPage({
   searchParams,
 }: {
   searchParams: { message: string }
 }) {
+  const { user } = await getUser()
+  if (user) redirect('/dashboard')
   return (
     <div className='flex min-h-screen'>
       {/* Columna de la imagen */}
