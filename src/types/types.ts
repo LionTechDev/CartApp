@@ -5,6 +5,22 @@ export interface Menu {
   image?: string
   isActive: boolean
 }
+export interface Store {
+ store_id: string
+ name: string,
+ address: string,
+ phone: string,
+ email: string,
+ country: string,
+ city: string,
+ state: string,
+ image?: string,
+ zipcode: string,
+ schedule:{},
+ store_email: string,
+ lang:[],
+ currency: [],
+}
 
 export interface Category {
   menu_id: string;
