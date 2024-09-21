@@ -47,6 +47,11 @@ export default function Component() {
       count: 1,
       image: '/placeholder.svg?height=100&width=200',
     },
+    {
+      name: 'Categoría 4',
+      count: 1,
+      image: '/placeholder.svg?height=100&width=200',
+    },
   ])
   const [selectedCategory, setSelectedCategory] = useState(categories[0].name)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
