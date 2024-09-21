@@ -17,7 +17,7 @@ const AccountForm = ({
         <div className='grid gap-2'>
           <Label htmlFor='email'>Correo Electrónico</Label>
           <Input
-            id='email 2'
+            id='email'
             name='email'
             type='email'
             required
