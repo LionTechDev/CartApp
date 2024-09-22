@@ -6,9 +6,7 @@ import { getUser } from '@/utils/utils'
 import { revalidatePath } from 'next/cache'
 
 export const createStore = async (formData: FormData) => {
-  console.log(formData)
   const store = Object.fromEntries(formData.entries())
-
   const supabase = createClient()
   const { user } = await getUser()
   const { error } = await supabase.from('stores').insert({
@@ -16,6 +14,7 @@ export const createStore = async (formData: FormData) => {
     user_id: user?.id,
     email: user?.email,
   })
+  
   if (error) throw new Error(error?.message)
   revalidatePath('/dashboard/account')
 }

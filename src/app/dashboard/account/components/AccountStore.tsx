@@ -43,7 +43,13 @@ const AccountStore = async () => {
 						</Button>
 					</div>
 					<div className="grid gap-6 md:grid-cols-2 mb-6">
-						<Input className="hidden" name="store_id" defaultValue={store_id} />
+						{stores?.length > 0 && (
+							<Input
+								className="hidden"
+								name="store_id"
+								defaultValue={store_id}
+							/>
+						)}
 						<Input
 							placeholder="Nombre del establecimiento"
 							className="bg-white border-gray-200"
