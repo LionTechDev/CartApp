@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import AccountInfo from './components/AccountInfo'
 import { Separator } from '@radix-ui/react-select'
-import AccountSchedule from './components/AccountSchedule'
+//import AccountSchedule from './components/AccountSchedule'
 import AccountStore from './components/AccountStore'
 
 export default function Component() {
