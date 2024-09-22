@@ -31,5 +31,5 @@ export const createNewMenu = async (menuTitle: string) => {
     .insert({ title: menuTitle, user_id: user?.id })
   revalidatePath('/dashboard/menus')
 
-  if (error) return error
+  if (error) throw new Error(error?.message)
 }

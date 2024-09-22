@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
 export async function checkLogin() {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const {
     data: { user },
@@ -14,7 +14,7 @@ export async function checkLogin() {
 }
 
 export async function getUser() {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const {
     data: { user },
