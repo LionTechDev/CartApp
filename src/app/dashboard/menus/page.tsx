@@ -1,15 +1,18 @@
 import React from "react";
-import AsideMenu from "./components/AsideMenu";
+import AsideMenu from "../../../components/AsideMenu";
 import { CardMenu } from "./components/CardMenu";
 import { getAllMenus } from "./services/services";
+import CreateNewMenuButton from "./components/CreateNewMenuButton";
 
 const Menus = async () => {
 	const { menus, error } = await getAllMenus();
-	console.log(menus);
 
 	return (
 		<div className="flex h-screen bg-gray-100">
-			<AsideMenu />
+			<AsideMenu href="/dashboard">
+				<CreateNewMenuButton />
+			</AsideMenu>
+
 			<main className="flex-1 overflow-y-auto p-8">
 				<h1 className="text-3xl font-bold mb-6">Mis Cartas</h1>
 
