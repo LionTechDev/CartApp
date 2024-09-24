@@ -20,7 +20,7 @@ const CreateCategoryButton = ({ menu_id }: any) => {
 				name="title"
 				className="bg-white border-gray-200 mb-4"
 			/>
-			<Button formAction={handleSubmit}>Crear nueva carta</Button>
+			<Button formAction={handleSubmit}>Crear nueva categoria</Button>
 		</form>
 	);
 };

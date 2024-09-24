@@ -13,9 +13,8 @@ const Menu = async ({ params }: { params: { menu_id: string } }) => {
 				<CreateCategoryButton menu_id={params?.menu_id} />
 			</AsideMenu>
 			<main className="flex-1 overflow-y-auto p-8">
-				<h1 className="text-3xl font-bold mb-6">Carta</h1>
+				<h1 className="text-3xl font-bold mb-6">CATEGORIAS</h1>
 				{/* Display menu details here */}
-				<h6>CATEGORIAS:</h6>
 				<div className="flex flex-col gap-5">
 					{data && data?.length > 0 ? (
 						data?.map((item) => (
