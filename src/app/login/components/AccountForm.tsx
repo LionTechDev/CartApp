@@ -10,7 +10,6 @@ const AccountForm = ({
 	message: string | null;
 	variant: "login" | "register";
 }) => {
-	console.log("cargo en cliente?");
 	return (
 		<form>
 			<div className="grid gap-4">
