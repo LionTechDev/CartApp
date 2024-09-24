@@ -21,7 +21,6 @@ export const createStore = async (formData: FormData) => {
 
 export const updateStore = async (formData: FormData) => {
   const store = Object.fromEntries(formData.entries())
-  console.log(store)
   const supabase = createClient()
   const { error } = await supabase
     .from('stores')
@@ -30,7 +29,6 @@ export const updateStore = async (formData: FormData) => {
       zipcode: store.zipcode ? Number(store.zipcode) : 11111,
     })
     .eq('store_id', store.store_id)
-  console.log(error)
   if (error) throw new Error(error?.message)
   revalidatePath('/dashboard/account')
 }
