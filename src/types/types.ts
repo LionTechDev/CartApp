@@ -23,10 +23,10 @@ export interface Store {
 }
 
 export interface Category {
-  menu_id: string
-  category_id: string
+  menu_id?: string
+  category_id?: string
   title: string
-  image?: string
+  image?: string | null
   products?: Product[]
 }
 export interface Product {
