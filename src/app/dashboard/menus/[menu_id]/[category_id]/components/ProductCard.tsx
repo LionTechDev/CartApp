@@ -7,13 +7,17 @@ const ProductCard = ({ product }: any) => {
 	return (
 		<div
 			key={product.product_id}
-			className="flex flex-col gap-2 p-5 bg-gray-200"
+			className="flex justify-between items-center gap-5 border-b pb-5"
 		>
-			<div>{product.title}</div>
-			<span className="text-gray-500 text-sm">Descripcion: </span>
-			<div className="flex gap-5 justify-between">
-				{product.description}
-				<div>{product.price}€</div>
+			<div>
+				<div className="font-bold text-xl">{product.title}</div>
+				<div className="flex gap-5 items-center">
+					<span className="text-gray-500 text-sm">{product.description}</span>
+				</div>
+				<div>
+					<span className="text-gray-500 text-sm">Precio: </span>
+					{product.price}€
+				</div>
 			</div>
 			<Button
 				variant="outline"

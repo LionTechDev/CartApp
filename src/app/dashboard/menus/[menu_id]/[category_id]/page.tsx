@@ -24,15 +24,13 @@ const Products = async ({
 					<CreateProduct category_id={params.category_id} />
 				</div>
 				<div className="flex flex-col gap-5">
-					<div className="flex gap-5">
-						{products && products?.length > 0 ? (
-							products?.map((product) => (
-								<ProductCard key={product.product_id} product={product} />
-							))
-						) : (
-							<h1>No hay productos , Agrega uno</h1>
-						)}
-					</div>
+					{products && products?.length > 0 ? (
+						products?.map((product) => (
+							<ProductCard key={product.product_id} product={product} />
+						))
+					) : (
+						<h1>No hay productos , Agrega uno</h1>
+					)}
 				</div>
 			</main>
 		</div>
