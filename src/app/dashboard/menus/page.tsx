@@ -3,9 +3,11 @@ import AsideMenu from "../../../components/AsideMenu";
 import { CardMenu } from "./components/CardMenu";
 import { getAllMenus } from "./services/services";
 import CreateNewMenuButton from "./components/CreateNewMenuButton";
+import { checkLogin } from "@/utils/utils";
 
 const Menus = async () => {
 	const { menus, error } = await getAllMenus();
+	await checkLogin();
 
 	return (
 		<div className="flex h-screen bg-gray-100">
