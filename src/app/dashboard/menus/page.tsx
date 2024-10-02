@@ -10,7 +10,7 @@ const Menus = async () => {
 	await checkLogin();
 
 	return (
-		<div className="flex h-screen bg-gray-100">
+		<div>
 			<AsideMenu href="/dashboard">
 				<CreateNewMenuButton />
 			</AsideMenu>

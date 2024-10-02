@@ -11,15 +11,17 @@ export default function AsideMenu({
 }) {
 	// Correct prop name: children
 	return (
-		<aside className="w-64 bg-white shadow-md flex flex-col">
-			<div className="p-4 flex-grow">
-				<Link href={href}>
-					<Button variant="ghost" className="w-full justify-start mb-4">
-						<ArrowLeft className="mr-2 h-4 w-4" /> Volver
-					</Button>
-				</Link>
-				<div>{children}</div> {/* Render passed children here */}
-			</div>
+		<aside
+			className=" hidden md:flex items-center justify-between  bg-white
+		py-4 px-2
+		shadow-md"
+		>
+			<Link href={href}>
+				<Button variant="ghost" className="w-full justify-start">
+					<ArrowLeft className="mr-2 h-4 w-4" /> Volver
+				</Button>
+			</Link>
+			<div>{children}</div> {/* Render passed children here */}
 		</aside>
 	);
 }

@@ -10,11 +10,9 @@ const Categories = async ({ params }: { params: { menu_id: string } }) => {
 	const { data } = await getMenuCategories(params.menu_id); // Pass menu_id to your service
 
 	return (
-		<div className="flex h-screen bg-gray-100">
+		<div>
 			<AsideMenu href="/dashboard/menus">
-				<>
-					<CreateCategoryButton menu_id={params?.menu_id} />
-				</>
+				<CreateCategoryButton menu_id={params?.menu_id} />
 			</AsideMenu>
 			<main className="flex flex-col overflow-y-auto p-8 gap-5">
 				{/* CATEGORIAS */}

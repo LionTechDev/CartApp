@@ -13,12 +13,12 @@ const CreateCategoryButton = ({ menu_id }: any) => {
 	};
 
 	return (
-		<form>
+		<form className="flex justify-center items-center gap-5">
 			<Input
 				placeholder="title"
 				id="title"
 				name="title"
-				className="bg-white border-gray-200 mb-4"
+				className="bg-white border-gray-200 "
 			/>
 			<Button formAction={handleSubmit}>Crear nueva categoria</Button>
 		</form>
