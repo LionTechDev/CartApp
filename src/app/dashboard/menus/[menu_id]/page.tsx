@@ -18,7 +18,7 @@ const Categories = async ({ params }: { params: { menu_id: string } }) => {
 				{/* CATEGORIAS */}
 				<div className="flex flex-col gap-5">
 					<h1>Categorias</h1>
-					<div className="flex gap-5">
+					<div className="flex gap-5 flex-wrap">
 						{data && data?.length > 0 ? (
 							data?.map((item) => (
 								<div
