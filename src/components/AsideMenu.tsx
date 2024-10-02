@@ -12,7 +12,7 @@ export default function AsideMenu({
 	// Correct prop name: children
 	return (
 		<aside
-			className=" hidden md:flex items-center justify-between  bg-white
+			className=" md:flex items-center justify-between  bg-white
 		py-4 px-2
 		shadow-md"
 		>
