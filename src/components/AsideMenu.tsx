@@ -21,7 +21,7 @@ export default function AsideMenu({
 					<ArrowLeft className="mr-2 h-4 w-4" /> Volver
 				</Button>
 			</Link>
-			<div>{children}</div> {/* Render passed children here */}
+			<div>{children}</div>
 		</aside>
 	);
 }

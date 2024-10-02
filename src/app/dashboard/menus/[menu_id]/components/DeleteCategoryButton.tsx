@@ -4,7 +4,7 @@ import React from "react";
 import { deleteCategory } from "../services/services";
 
 const DeleteCategoryButton = ({ category_id }: { category_id: string }) => {
-	return <Button onClick={() => deleteCategory(category_id)}>eliminar</Button>;
+	return <Button onClick={() => deleteCategory(category_id)}>X</Button>;
 };
 
 export default DeleteCategoryButton;
