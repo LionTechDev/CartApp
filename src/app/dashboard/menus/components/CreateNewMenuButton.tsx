@@ -19,10 +19,10 @@ const CreateNewMenuButton = () => {
 		setMenuName(e.target.value);
 	};
 	return (
-		<div>
+		<div className="flex justify-center items-center">
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button className="w-full mb-4">
+					<Button className="w-full ">
 						<Plus className="mr-2 h-4 w-4" /> Crear Nueva Carta
 					</Button>
 				</DialogTrigger>
