@@ -7,7 +7,6 @@ import { checkLogin } from "@/utils/utils";
 
 const Menus = async () => {
 	const { menus, error } = await getAllMenus();
-	await checkLogin();
 
 	return (
 		<div>
