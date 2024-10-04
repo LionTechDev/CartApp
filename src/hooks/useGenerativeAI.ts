@@ -5,8 +5,6 @@ import {
   HarmCategory,
 } from "@google/generative-ai"; 
 
-/* const API_KEY = "AIzaSyDEAlfQFoXQuTJttlLhbmrLrY0GyfNIQyQ"; */
-/* const API_KEY = process.env.GEMINI_API_KEY; */
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
 export const useGenerativeAI = () => {
@@ -31,10 +29,8 @@ export const useGenerativeAI = () => {
         },
       ];
 
-
-
+const genAI = new GoogleGenerativeAI(API_KEY);
       
-      const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
         safetySettings: [
