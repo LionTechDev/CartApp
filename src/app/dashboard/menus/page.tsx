@@ -2,8 +2,6 @@ import React from "react";
 import AsideMenu from "../../../components/AsideMenu";
 import { CardMenu } from "./components/CardMenu";
 import { getAllMenus } from "./services/services";
-import CreateNewMenuButton from "./components/CreateNewMenuButton";
-import { checkLogin } from "@/utils/utils";
 import CreateMenu from "./components/CreateMenu";
 
 const Menus = async () => {
