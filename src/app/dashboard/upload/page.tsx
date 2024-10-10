@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { Button } from "@/components/ui/button";
 import { CldUploadWidget } from "next-cloudinary";
@@ -42,7 +42,7 @@ export default function UploadImage() {
 		</>
 	);
 }
-
+ */
 /*
 VARIANTE SIN COMPONENTE CLOUDINARY
 
