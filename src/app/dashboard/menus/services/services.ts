@@ -23,12 +23,12 @@ export const deleteMenu = async (menuId: string) => {
   revalidatePath('/dashboard/menus')
 }
 
-export const createNewMenu = async (menuTitle: string) => {
+export const createNewMenu = async (menuTitle: string, image:string) => {
   const supabase = createClient()
   const { user } = await getUser()
   const { error } = await supabase
     .from('menu')
-    .insert({ title: menuTitle, user_id: user?.id })
+    .insert({ title: menuTitle, user_id: user?.id , image: image})
   revalidatePath('/dashboard/menus')
 
   if (error) throw new Error(error?.message)
